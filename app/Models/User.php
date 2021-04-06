@@ -11,13 +11,11 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
 
+    public $timestamps = false;
+
 
     protected $hidden = [
-        'senha',
-    ];
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
+        'password',
     ];
 
     public function getJWTIdentifier()
