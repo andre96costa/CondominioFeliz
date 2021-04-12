@@ -14,6 +14,66 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/testando', function () {
+    return "Mais uma tentativa";
 });
+
+//Rota erro de autorização
+Route::get('/401', [AuthController::class, 'unauthorized'])->name('login');
+
+//Rotas publicas -> login e registro.
+Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/auth/registrar', [AuthController::class, 'registrar']);
+
+//Middleware -> No momento que uma das rotas abaixo for chamada 
+//o middleware se encarrega de verificar se há um usuario logado.
+Route::middleware('auth:api')->group(function () {
+    //Valida se a um usuario logado
+    Route::post('/auth/validate', [AuthController::class, 'validateToken']);
+    //Faz logout do usuario "destruindo" o token ativo
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
+
+    //Mural
+    Route::get('/mural', [MuralController::class, 'buscarTodos']);
+    Route::get('/mural/{id}/like', [MuralController::class, 'like']);
+
+    //Documentos
+    Route::get('/documentos', [DocumentoController::class, 'buscarTodos']);
+
+    //Reclamações
+    Route::get('/reclamacoes', [ReclamacaoController::class, 'minhasReclamacoes'] );
+    Route::post('/reclamacao', [ReclamacaoController::class, 'fazerReclamacao']);
+    Route::post('/reclamacao/arquivo', [ReclamacaoController::class, 'adicionarArquivo']);
+
+    //Boletos
+    Route::get('/boletos', [BoletoController::class, 'buscarTodos']);
+
+    //Achados e Perdidos
+    Route::get('/achadosEperdidos', [AchadoPerdidoController::class, 'buscarTodos'] );
+    Route::post('/achadosEperdidos', [AchadoPerdidoController::class, 'inserir'] );
+    Route::put('/achadosEperdidos/{id}', [AchadoPerdidoController::class, 'atualizar']);
+
+    //Unidade
+    Route::get('/unidade/{id}', [UnidadeController::class, 'buscarInformacao']);
+    Route::post('/unidade/{id}/adicionardependente', [UnidadeController::class, 'adicionarDependente']);
+    Route::post('/unidade/{id}/adicionarveiculo', [UnidadeController::class, 'adicionarVeiculo']);
+    Route::post('/unidade/{id}/adicionaranimal', [UnidadeController::class, 'adicionarAnimal']);
+    Route::post('/unidade/{id}/removerdependente', [UnidadeController::class, 'removerDependente']);
+    Route::post('/unidade/{id}/removerveiculo', [UnidadeController::class, 'removerVeiculo']);
+    Route::post('/unidade/{id}/removeranimal', [UnidadeController::class, 'removerAnimal']);
+
+    //Reservas
+    Route::get('/reservas', [ReservaController::class, 'buscarReservas']);
+    Route::post('/reserva/{id}', [ReservaController::class, 'fazerReserva']);
+    Route::get('/reserva/{id}/diasfechado', [ReservaController::class, 'buscarDatasFechado']);
+    Route::get('/reserva/{id}/horas', [ReservaController::class, 'buscarHoraReservadas']);
+    Route::get('/minhasreservas', [ReservaController::class, 'minhasReservas']);
+    Route::delete('/minhasreservas/{id}', [ReservaController::class, 'deletarReserva']);
+
+    //Perfil usuario
+    Route::get('/perfil', [UserController::class, 'buscarPerfil']);
+    Route::put('/perfil/email/{id}', [UserController::class, 'alterarEmail']);
+    Route::put('/perfil/senha/{id}', [UserController::class, 'alterarSenha']);
+   
+});
+
