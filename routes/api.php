@@ -3,6 +3,17 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AchadoPerdidoController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BoletoController;
+use App\Http\Controllers\DocumentoController;
+use App\Http\Controllers\MuralController;
+use App\Http\Controllers\ReclamacaoController;
+use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\UnidadeController;
+use App\Http\Controllers\UserController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
