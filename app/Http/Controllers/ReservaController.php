@@ -61,7 +61,7 @@ class ReservaController extends Controller
 
             foreach($datas as $chave => $value){
                 if($datas[$chave] == "Dom-Dom"){
-                    $dates[$chave] = "Dom";
+                    $datas[$chave] = "Dom";
                 }
                 $datas[$chave] .= ' '.$comeco.' as '.$fim;
             }
