@@ -99,7 +99,7 @@ class AuthController extends Controller
             $array['usuario'] = $usuario;
 
             $propriedades = Unidade::select(['id', 'nome'])->where('id_dono', $usuario['id'])->get();
-            $array['user']['propriedades'] = $propriedades;
+            $array['usuario']['propriedades'] = $propriedades;
 
         }else{
             $array['error'] = $validator->errors()->first();

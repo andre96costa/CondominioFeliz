@@ -46,7 +46,7 @@ Route::middleware('auth:api')->group(function () {
 
     //Mural
     Route::get('/mural', [MuralController::class, 'buscarTodos']);
-    Route::get('/mural/{id}/like', [MuralController::class, 'like']);
+    Route::post('/mural/{id}/like', [MuralController::class, 'like']);
 
     //Documentos
     Route::get('/documentos', [DocumentoController::class, 'buscarTodos']);
