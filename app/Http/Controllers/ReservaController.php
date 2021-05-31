@@ -118,7 +118,7 @@ class ReservaController extends Controller
     }
 
     public function buscarHoraReservadas($id, Request $request){
-        $array = ['error' => '' , 'lista' => []];
+        $array = ['error' => ''];
 
         $validator = Validator::make($request->all(), [
             'data' => 'required|date_format:Y-m-d'
@@ -173,7 +173,7 @@ class ReservaController extends Controller
 
                     foreach($timeLista as $timeItem){
                         if(!in_array($timeItem['id'], $paraRemover)){
-                            $array['list'][] = $timeItem;
+                            $array['lista'][] = $timeItem;
                         }
                     }
                 }else{
