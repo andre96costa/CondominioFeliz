@@ -69,9 +69,9 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/unidade/{id}/adicionardependente', [UnidadeController::class, 'adicionarDependente']);
     Route::post('/unidade/{id}/adicionarveiculo', [UnidadeController::class, 'adicionarVeiculo']);
     Route::post('/unidade/{id}/adicionaranimal', [UnidadeController::class, 'adicionarAnimal']);
-    Route::post('/unidade/{id}/removerdependente', [UnidadeController::class, 'removerDependente']);
-    Route::post('/unidade/{id}/removerveiculo', [UnidadeController::class, 'removerVeiculo']);
-    Route::post('/unidade/{id}/removeranimal', [UnidadeController::class, 'removerAnimal']);
+    Route::delete('/unidade/{id}/removerdependente', [UnidadeController::class, 'removerDependente']);
+    Route::delete('/unidade/{id}/removerveiculo', [UnidadeController::class, 'removerVeiculo']);
+    Route::delete('/unidade/{id}/removeranimal', [UnidadeController::class, 'removerAnimal']);
 
     //Reservas
     Route::get('/reservas', [ReservaController::class, 'buscarReservas']);
